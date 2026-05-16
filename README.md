@@ -1,6 +1,7 @@
 # mcp-fence
 
 [![CI](https://github.com/DaoyuanLi2816/mcp-fence/actions/workflows/ci.yml/badge.svg)](https://github.com/DaoyuanLi2816/mcp-fence/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/mcp-fence.svg)](https://pypi.org/project/mcp-fence/)
 [![Python](https://img.shields.io/badge/python-3.11%2B-blue)](https://www.python.org)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
 
@@ -32,6 +33,14 @@ default**. An optional local-LLM judge can talk to a local Ollama or
 OpenAI-compatible endpoint.
 
 ## Install
+
+From PyPI:
+
+```bash
+pip install mcp-fence
+```
+
+From source (for contributors):
 
 ```bash
 git clone https://github.com/DaoyuanLi2816/mcp-fence
