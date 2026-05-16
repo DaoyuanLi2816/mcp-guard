@@ -1,6 +1,6 @@
 # Threat model
 
-`mcp-guard` is built around the threats a developer of an MCP server has
+`mcp-fence` is built around the threats a developer of an MCP server has
 to consider when they ship their server to other people, and the threats a
 person installing a third-party MCP server has to consider before
 running it on their own machine.
@@ -53,7 +53,7 @@ Trust boundaries:
 
 ## Attacker models
 
-mcp-guard is concerned with all of these:
+mcp-fence is concerned with all of these:
 
 - **Malicious MCP server author.** Ships a server that intentionally
   exfiltrates secrets, runs commands, or poisons tool metadata.
@@ -87,10 +87,10 @@ mcp-guard is concerned with all of these:
 - **Prompt injection / tool poisoning.** `MCPG010`, `MCPG011`,
   `MCPG024`, `MCPG028`.
 - **Rug pull / metadata drift.** Inspection captures the live inventory;
-  re-running `mcp-guard inspect` after an update lets a CI step detect
+  re-running `mcp-fence inspect` after an update lets a CI step detect
   unexpected new tools.
 
-## What `mcp-guard` can detect
+## What `mcp-fence` can detect
 
 - Misconfigurations and risky tokens in `mcp.json` or arbitrary start
   commands.
@@ -101,7 +101,7 @@ mcp-guard is concerned with all of these:
   (and any third-party server that fails the same way).
 - The most common SARIF-reportable patterns from CI.
 
-## What `mcp-guard` cannot guarantee
+## What `mcp-fence` cannot guarantee
 
 - It cannot prove a server is safe — only that it does not trip the
   rules we know about today.
@@ -115,10 +115,10 @@ mcp-guard is concerned with all of these:
 
 ## Operational guidance
 
-- Run `mcp-guard scan` on every `mcp.json` you commit.
-- Run `mcp-guard fuzz` (`--toy-mode` for examples, `--allow-unsafe` only
-  inside `mcp-guard sandbox`) before adopting a third-party server.
-- Wire `mcp-guard scan --format sarif` into CI so findings surface in
+- Run `mcp-fence scan` on every `mcp.json` you commit.
+- Run `mcp-fence fuzz` (`--toy-mode` for examples, `--allow-unsafe` only
+  inside `mcp-fence sandbox`) before adopting a third-party server.
+- Wire `mcp-fence scan --format sarif` into CI so findings surface in
   GitHub code scanning.
 - Treat **all** tool output as untrusted text. Wrap it in a
   `<tool-output>` envelope inside your assistant prompt rather than

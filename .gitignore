@@ -37,9 +37,9 @@ coverage.xml
 # OS
 Thumbs.db
 
-# mcp-guard artifacts
-.mcp-guard/
+# mcp-fence artifacts
+.mcp-fence/
 *.sarif
-mcp_guard_report.html
-mcp_guard_scan.json
-mcp_guard_fuzz_*.json
+mcp_fence_report.html
+mcp_fence_scan.json
+mcp_fence_fuzz_*.json

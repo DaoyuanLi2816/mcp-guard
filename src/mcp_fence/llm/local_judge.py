@@ -1,6 +1,6 @@
 """Optional local-LLM judge.
 
-The judge is **strictly optional**. mcp-guard does not call out to any
+The judge is **strictly optional**. mcp-fence does not call out to any
 cloud LLM. By default the CLI does not enable it. When enabled it talks
 to a local Ollama instance or any OpenAI-compatible local server (e.g.
 ``vllm`` on ``http://localhost:8000/v1``).

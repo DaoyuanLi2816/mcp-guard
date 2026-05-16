@@ -1,6 +1,6 @@
 # Optional local-LLM judge
 
-`mcp-guard` is local-first. The core scanner, fuzzer, sandbox, and
+`mcp-fence` is local-first. The core scanner, fuzzer, sandbox, and
 report generator do not need any LLM. The **optional** semantic judge
 adds a "is this tool description suspicious?" classifier that runs
 *entirely against a local endpoint*.
@@ -51,14 +51,14 @@ ollama pull qwen3:8b
 ollama serve            # usually started by the desktop client
 
 # Run a scan with the judge enabled.
-mcp-guard scan examples/vulnerable_metadata_server/mcp.json \
+mcp-fence scan examples/vulnerable_metadata_server/mcp.json \
     --inspect --llm-judge ollama --model qwen3:8b
 ```
 
 For a local vLLM server:
 
 ```bash
-mcp-guard scan examples/vulnerable_metadata_server/mcp.json \
+mcp-fence scan examples/vulnerable_metadata_server/mcp.json \
     --inspect \
     --llm-judge openai-compatible \
     --llm-endpoint http://localhost:8000/v1 \

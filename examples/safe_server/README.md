@@ -1,7 +1,7 @@
 # `safe_server`
 
 A minimal, well-behaved MCP server used as a positive baseline by
-mcp-guard's tests and tutorials.
+mcp-fence's tests and tutorials.
 
 ## Tools
 
@@ -17,7 +17,7 @@ mcp-guard's tests and tutorials.
 python examples/safe_server/server.py
 ```
 
-The server speaks newline-delimited JSON-RPC on stdio. `mcp-guard inspect
+The server speaks newline-delimited JSON-RPC on stdio. `mcp-fence inspect
 examples/safe_server/mcp.json` should report two tools and zero findings.
 
 ## Why is it safe?

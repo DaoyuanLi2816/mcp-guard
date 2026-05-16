@@ -52,7 +52,7 @@ def _sandbox_hint(result: ScanResult) -> str | None:
         return None
     cmd = result.target if result.target.endswith(".json") else "<your mcp.json>"
     return (
-        f"mcp-guard sandbox {cmd} --profile strict --dry-run"
+        f"mcp-fence sandbox {cmd} --profile strict --dry-run"
     )
 
 

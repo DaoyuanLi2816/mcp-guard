@@ -38,26 +38,26 @@ jobs:
 
       - name: scan vulnerable_metadata_server (json)
         run: |
-          mcp-guard scan examples/vulnerable_metadata_server/mcp.json --format json --output /tmp/mcp_guard_scan.json || true
-          test -s /tmp/mcp_guard_scan.json
+          mcp-fence scan examples/vulnerable_metadata_server/mcp.json --format json --output /tmp/mcp_fence_scan.json || true
+          test -s /tmp/mcp_fence_scan.json
 
       - name: render html artifact
         run: |
-          mcp-guard report /tmp/mcp_guard_scan.json --format html --output /tmp/mcp_guard_report.html
-          test -s /tmp/mcp_guard_report.html
+          mcp-fence report /tmp/mcp_fence_scan.json --format html --output /tmp/mcp_fence_report.html
+          test -s /tmp/mcp_fence_report.html
 
       - name: sandbox dry-run
         run: |
-          mcp-guard sandbox examples/vulnerable_filesystem_server/mcp.json --profile strict --dry-run
+          mcp-fence sandbox examples/vulnerable_filesystem_server/mcp.json --profile strict --dry-run
 
       - name: upload reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: mcp-guard-reports-${{ matrix.os }}-py${{ matrix.python-version }}
+          name: mcp-fence-reports-${{ matrix.os }}-py${{ matrix.python-version }}
           path: |
-            /tmp/mcp_guard_scan.json
-            /tmp/mcp_guard_report.html
+            /tmp/mcp_fence_scan.json
+            /tmp/mcp_fence_report.html
           if-no-files-found: ignore
 
   windows:

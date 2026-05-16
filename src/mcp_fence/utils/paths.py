@@ -41,5 +41,5 @@ def looks_like_mcp_config(data: Any) -> bool:
 
 
 def project_root() -> Path:
-    """The directory the user ran ``mcp-guard`` from. Cwd is good enough."""
+    """The directory the user ran ``mcp-fence`` from. Cwd is good enough."""
     return Path.cwd().resolve()

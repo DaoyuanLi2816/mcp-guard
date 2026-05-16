@@ -36,7 +36,7 @@ def _gate_case(case: FuzzCase, inventory: Inventory, mode: RunMode) -> tuple[boo
                 False,
                 "safe-mode: refuses to execute command-injection payloads against "
                 "high-risk tool; rerun with --toy-mode or --allow-unsafe, or use "
-                "`mcp-guard sandbox`",
+                "`mcp-fence sandbox`",
             )
     return True, None
 

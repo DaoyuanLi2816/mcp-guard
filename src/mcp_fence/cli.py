@@ -1,4 +1,4 @@
-"""mcp-guard command-line interface."""
+"""mcp-fence command-line interface."""
 
 from __future__ import annotations
 
@@ -27,7 +27,7 @@ from .utils.logging import configure as configure_logging
 from .utils.paths import write_text
 
 app = typer.Typer(
-    name="mcp-guard",
+    name="mcp-fence",
     help="Local-first security scanner / inspector / fuzzer / sandbox for MCP servers.",
     no_args_is_help=True,
     add_completion=False,
@@ -37,7 +37,7 @@ app = typer.Typer(
 
 def _version_callback(value: bool) -> None:
     if value:
-        typer.echo(f"mcp-guard {__version__}")
+        typer.echo(f"mcp-fence {__version__}")
         raise typer.Exit()
 
 
@@ -398,7 +398,7 @@ def sandbox(
 
 @app.command()
 def report(
-    input_path: Path = typer.Argument(..., help="Path to a previous mcp-guard JSON result."),
+    input_path: Path = typer.Argument(..., help="Path to a previous mcp-fence JSON result."),
     format: str = typer.Option("html", "--format", "-f", help="html | text | sarif | json"),
     output: Path | None = typer.Option(None, "--output", "-o", help="Write report to PATH."),
 ) -> None:
@@ -426,7 +426,7 @@ def report(
 @app.command("init-example")
 def init_example(
     destination: Path = typer.Argument(
-        Path("./mcp-guard-examples"),
+        Path("./mcp-fence-examples"),
         help="Where to copy the bundled examples.",
     ),
     overwrite: bool = typer.Option(False, "--overwrite", help="Overwrite an existing directory."),
@@ -451,13 +451,13 @@ def init_example(
     typer.echo(f"copied examples to {destination}")
     typer.echo(
         "\nTry:\n"
-        f"  mcp-guard scan {destination}/vulnerable_metadata_server/mcp.json\n"
-        f"  mcp-guard inspect {destination}/safe_server/mcp.json\n"
-        f"  mcp-guard fuzz {destination}/vulnerable_filesystem_server/mcp.json"
+        f"  mcp-fence scan {destination}/vulnerable_metadata_server/mcp.json\n"
+        f"  mcp-fence inspect {destination}/safe_server/mcp.json\n"
+        f"  mcp-fence fuzz {destination}/vulnerable_filesystem_server/mcp.json"
     )
 
 
-def main() -> None:  # for ``python -m mcp_guard``
+def main() -> None:  # for ``python -m mcp_fence``
     app()
 
 

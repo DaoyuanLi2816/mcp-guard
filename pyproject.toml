@@ -3,7 +3,7 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "mcp-guard"
+name = "mcp-fence"
 version = "0.1.0"
 description = "Local-first security scanner, MCP protocol inspector, dynamic fuzzer, sandbox runner, and report generator for Model Context Protocol servers."
 readme = "README.md"
@@ -42,22 +42,22 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/DaoyuanLi2816/mcp-guard"
-Issues = "https://github.com/DaoyuanLi2816/mcp-guard/issues"
-Repository = "https://github.com/DaoyuanLi2816/mcp-guard"
+Homepage = "https://github.com/DaoyuanLi2816/mcp-fence"
+Issues = "https://github.com/DaoyuanLi2816/mcp-fence/issues"
+Repository = "https://github.com/DaoyuanLi2816/mcp-fence"
 
 [project.scripts]
-mcp-guard = "mcp_guard.cli:app"
+mcp-fence = "mcp_fence.cli:app"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["mcp_guard*"]
+include = ["mcp_fence*"]
 
 [tool.setuptools.package-data]
-mcp_guard = ["report/templates/*.html", "report/templates/*.css"]
+mcp_fence = ["report/templates/*.html", "report/templates/*.css"]
 
 [tool.ruff]
 line-length = 100

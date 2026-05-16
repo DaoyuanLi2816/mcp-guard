@@ -1,8 +1,8 @@
 """Scanner for tool metadata and JSON schema risks.
 
-Operates on an :class:`mcp_guard.models.Inventory` produced by the MCP
+Operates on an :class:`mcp_fence.models.Inventory` produced by the MCP
 inspector. All checks are deterministic; the optional LLM judge augments
-results via :mod:`mcp_guard.llm.local_judge`.
+results via :mod:`mcp_fence.llm.local_judge`.
 """
 
 from __future__ import annotations

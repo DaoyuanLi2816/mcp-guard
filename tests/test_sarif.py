@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import json
 
-from mcp_guard.models import Finding, Location, ScanResult, Severity
-from mcp_guard.report.sarif import render_sarif
+from mcp_fence.models import Finding, Location, ScanResult, Severity
+from mcp_fence.report.sarif import render_sarif
 
 
 def test_sarif_minimum_shape():
@@ -28,7 +28,7 @@ def test_sarif_minimum_shape():
     runs = payload["runs"]
     assert isinstance(runs, list) and runs
     run = runs[0]
-    assert run["tool"]["driver"]["name"] == "mcp-guard"
+    assert run["tool"]["driver"]["name"] == "mcp-fence"
     rule_ids = {r["id"] for r in run["tool"]["driver"]["rules"]}
     assert "MCPG010" in rule_ids
     assert len(run["results"]) == 1

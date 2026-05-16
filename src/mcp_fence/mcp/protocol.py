@@ -10,7 +10,7 @@ import itertools
 from typing import Any
 
 PROTOCOL_VERSION = "2024-11-05"
-CLIENT_NAME = "mcp-guard"
+CLIENT_NAME = "mcp-fence"
 CLIENT_VERSION = "0.1.0"
 
 

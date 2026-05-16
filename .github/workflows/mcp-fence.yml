@@ -1,6 +1,6 @@
-name: mcp-guard
+name: mcp-fence
 
-# Reusable workflow that runs mcp-guard against the repo's `mcp.json`
+# Reusable workflow that runs mcp-fence against the repo's `mcp.json`
 # configurations and uploads SARIF to GitHub code scanning.
 
 on:
@@ -26,28 +26,28 @@ jobs:
           python-version: '3.12'
           cache: pip
 
-      - name: install mcp-guard
+      - name: install mcp-fence
         run: |
           python -m pip install --upgrade pip
           python -m pip install -e ".[dev]"
 
       - name: scan configs and emit SARIF
         run: |
-          mkdir -p .mcp-guard
+          mkdir -p .mcp-fence
           shopt -s globstar nullglob
           declare -a targets=( **/mcp.json **/.mcp.json **/claude_desktop_config.json )
           if [ ${#targets[@]} -eq 0 ]; then
             echo "no mcp.json-shaped files found; emitting empty SARIF"
-            mcp-guard scan . --format sarif --output .mcp-guard/results.sarif || true
+            mcp-fence scan . --format sarif --output .mcp-fence/results.sarif || true
             exit 0
           fi
           # Combine the first finding-rich target into SARIF.
           for t in "${targets[@]}"; do
-            mcp-guard scan "$t" --format sarif --output ".mcp-guard/$(echo "$t" | tr '/' '_').sarif" || true
+            mcp-fence scan "$t" --format sarif --output ".mcp-fence/$(echo "$t" | tr '/' '_').sarif" || true
           done
 
       - name: upload SARIF
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: .mcp-guard
-          category: mcp-guard
+          sarif_file: .mcp-fence
+          category: mcp-fence

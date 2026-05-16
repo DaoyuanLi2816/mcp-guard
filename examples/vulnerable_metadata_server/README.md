@@ -15,9 +15,9 @@ through the description and name fields rather than the implementation.
 - The `mcp.json` `env` contains a fake `OPENAI_API_KEY` to demonstrate
   the env-secret detector (`MCPG006`).
 
-## Expected mcp-guard findings
+## Expected mcp-fence findings
 
-From `mcp-guard scan`:
+From `mcp-fence scan`:
 
 - `MCPG006` (env secret).
 - `MCPG010` (prompt-injection phrase in description).
@@ -32,4 +32,4 @@ From `mcp-guard scan`:
 
 The example does not actually send any data anywhere; the hidden
 instruction is a literal string embedded in metadata. Removing the
-example does not affect the rest of mcp-guard.
+example does not affect the rest of mcp-fence.

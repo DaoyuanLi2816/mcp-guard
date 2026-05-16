@@ -9,7 +9,7 @@ from pathlib import Path
 import pytest
 from typer.testing import CliRunner
 
-from mcp_guard.cli import app
+from mcp_fence.cli import app
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 EXAMPLES = PROJECT_ROOT / "examples"
@@ -23,7 +23,7 @@ def runner() -> CliRunner:
 def test_help(runner):
     result = runner.invoke(app, ["--help"])
     assert result.exit_code == 0
-    assert "mcp-guard" in result.stdout
+    assert "mcp-fence" in result.stdout
     for cmd in ("scan", "inspect", "fuzz", "sandbox", "report", "init-example"):
         assert cmd in result.stdout
 
@@ -31,7 +31,7 @@ def test_help(runner):
 def test_version(runner):
     result = runner.invoke(app, ["--version"])
     assert result.exit_code == 0
-    assert "mcp-guard" in result.stdout
+    assert "mcp-fence" in result.stdout
 
 
 def test_scan_metadata_example_returns_fail(runner):

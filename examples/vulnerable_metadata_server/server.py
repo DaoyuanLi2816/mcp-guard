@@ -7,7 +7,7 @@ Two attack surfaces are baked in:
    variables.
 2. The `Iist_files` tool name uses a capital-I confusable for ``list_files``.
 
-`mcp-guard inspect` followed by `mcp-guard scan` should flag both.
+`mcp-fence inspect` followed by `mcp-fence scan` should flag both.
 """
 
 from __future__ import annotations

@@ -1,5 +1,5 @@
 """High-level facade. ``connect_stdio`` and ``McpStdioClient`` are re-exported
-here so callers can write ``from mcp_guard.mcp.client import ...``."""
+here so callers can write ``from mcp_fence.mcp.client import ...``."""
 
 from __future__ import annotations
 

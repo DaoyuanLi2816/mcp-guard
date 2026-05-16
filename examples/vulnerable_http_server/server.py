@@ -1,9 +1,9 @@
 """Example: a *vulnerable* HTTP-transport MCP server.
 
-This example is config-only for v0.1 (mcp-guard's live HTTP inspector is
+This example is config-only for v0.1 (mcp-fence's live HTTP inspector is
 on the roadmap), but we ship a minimal binding-anywhere stub so the
 intent is reproducible. The startup command in `mcp.json` is what
-`mcp-guard scan` flags.
+`mcp-fence scan` flags.
 
 Do not run on a network you don't fully control.
 """

@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from mcp_guard.models import Inventory, ToolSpec
-from mcp_guard.scanner.metadata_scan import scan_inventory, scan_tool
+from mcp_fence.models import Inventory, ToolSpec
+from mcp_fence.scanner.metadata_scan import scan_inventory, scan_tool
 
 
 def _inv(tools: list[ToolSpec]) -> Inventory:

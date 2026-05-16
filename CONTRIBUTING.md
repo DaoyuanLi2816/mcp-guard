@@ -1,12 +1,12 @@
 # Contributing
 
-Thanks for considering a contribution to `mcp-guard`.
+Thanks for considering a contribution to `mcp-fence`.
 
 ## Development setup
 
 ```bash
-git clone https://github.com/DaoyuanLi2816/mcp-guard
-cd mcp-guard
+git clone https://github.com/DaoyuanLi2816/mcp-fence
+cd mcp-fence
 python -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate
 python -m pip install -e ".[dev]"
@@ -21,7 +21,7 @@ pytest -q
 
 ## Adding a new rule
 
-1. Pick the next free `MCPGNNN` ID in `src/mcp_guard/constants.py`.
+1. Pick the next free `MCPGNNN` ID in `src/mcp_fence/constants.py`.
 2. Add the rule entry to `RULE_CATALOG` with `id`, `title`, `severity`,
    `category`, `default_recommendation`, and `rationale`.
 3. Implement detection in the relevant scanner module
@@ -35,10 +35,10 @@ pytest -q
 
 ## Adding a new fuzz payload category
 
-1. Append payloads to `src/mcp_guard/fuzz/payloads.py`.
-2. Wire the category into `src/mcp_guard/fuzz/generator.py` (decide which
+1. Append payloads to `src/mcp_fence/fuzz/payloads.py`.
+2. Wire the category into `src/mcp_fence/fuzz/generator.py` (decide which
    schema shapes generate it).
-3. Add or extend a detector in `src/mcp_guard/fuzz/detectors.py`.
+3. Add or extend a detector in `src/mcp_fence/fuzz/detectors.py`.
 4. Add a test that runs the generator against a representative schema
    and asserts the new category appears.
 

@@ -1,7 +1,7 @@
 """Light source-tree scanner for Python MCP server code.
 
 This is intentionally simple: regex-based, fast, conservative. It is meant
-to surface the most common foot-guns when a user points ``mcp-guard scan``
+to surface the most common foot-guns when a user points ``mcp-fence scan``
 at a project directory. AST-aware analysis is on the roadmap.
 """
 

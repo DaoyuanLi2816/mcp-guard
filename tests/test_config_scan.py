@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 
-from mcp_guard.scanner.config_scan import scan_ad_hoc_command, scan_config, scan_config_file
+from mcp_fence.scanner.config_scan import scan_ad_hoc_command, scan_config, scan_config_file
 
 
 def test_dangerous_start_command_curl_pipe_sh():

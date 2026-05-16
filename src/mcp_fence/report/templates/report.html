@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>mcp-guard report — {{ result.target }}</title>
+<title>mcp-fence report — {{ result.target }}</title>
 <style>
 :root {
   color-scheme: light dark;
@@ -77,7 +77,7 @@ pre { padding: 12px; overflow: auto; }
 <body>
 <div class="wrap">
   <header>
-    <h1>mcp-guard report</h1>
+    <h1>mcp-fence report</h1>
     <div class="muted">target: <code>{{ result.target | e }}</code> · kind: {{ result.kind }} · generated {{ result.completed_at or result.started_at }}</div>
   </header>
 
@@ -214,7 +214,7 @@ pre { padding: 12px; overflow: auto; }
 
   <h2>Methodology</h2>
   <dl class="kv">
-    <dt>mcp-guard</dt><dd>{{ result.tool_version }}</dd>
+    <dt>mcp-fence</dt><dd>{{ result.tool_version }}</dd>
     <dt>started</dt><dd>{{ result.started_at }}</dd>
     <dt>finished</dt><dd>{{ result.completed_at or '—' }}</dd>
     <dt>findings</dt><dd>{{ result.summary.total }}</dd>

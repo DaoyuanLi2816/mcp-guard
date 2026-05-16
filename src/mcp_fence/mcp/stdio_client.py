@@ -110,10 +110,10 @@ class McpStdioClient:
             raise StdioTransportError(f"Failed to spawn MCP server: {e}") from e
 
         self._stdout_thread = threading.Thread(
-            target=self._read_stdout, name="mcp-guard-stdout", daemon=True
+            target=self._read_stdout, name="mcp-fence-stdout", daemon=True
         )
         self._stderr_thread = threading.Thread(
-            target=self._read_stderr, name="mcp-guard-stderr", daemon=True
+            target=self._read_stderr, name="mcp-fence-stderr", daemon=True
         )
         self._stdout_thread.start()
         self._stderr_thread.start()

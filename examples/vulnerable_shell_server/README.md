@@ -13,7 +13,7 @@ demonstrate command-injection detection.
   `MCPG022`).
 - The `mcp.json` start command is `bash -c …`, which fires `MCPG001`.
 
-## Expected mcp-guard findings
+## Expected mcp-fence findings
 
 - `MCPG001` (shell-style start command).
 - `MCPG023` (RCE-implying tool name).
@@ -23,6 +23,6 @@ demonstrate command-injection detection.
 
 ## Safety
 
-The marker payload is `echo MCPG_FUZZ_MARKER_8f2a`. mcp-guard never sends
+The marker payload is `echo MCPG_FUZZ_MARKER_8f2a`. mcp-fence never sends
 `rm`, `mv`, or other destructive payloads. Even so, only run this server
-inside the bundled Docker sandbox or via `mcp-guard fuzz --toy-mode`.
+inside the bundled Docker sandbox or via `mcp-fence fuzz --toy-mode`.

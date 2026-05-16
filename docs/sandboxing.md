@@ -1,6 +1,6 @@
 # Sandboxing
 
-`mcp-guard sandbox` generates a `docker run` command that wraps any
+`mcp-fence sandbox` generates a `docker run` command that wraps any
 stdio MCP server with conservative defaults. The four built-in
 profiles trade off isolation against developer ergonomics.
 
@@ -42,7 +42,7 @@ All profiles set:
 
 ## Limitations
 
-`mcp-guard sandbox` is **not** a kernel exploit shield. In particular:
+`mcp-fence sandbox` is **not** a kernel exploit shield. In particular:
 
 - A 0-day in the Docker runtime escapes the container. Keep Docker
   updated.
@@ -60,11 +60,11 @@ All profiles set:
 
 ```bash
 # Print the docker command without executing it.
-mcp-guard sandbox examples/vulnerable_filesystem_server/mcp.json \
+mcp-fence sandbox examples/vulnerable_filesystem_server/mcp.json \
     --profile strict --dry-run
 
 # Actually run it (requires docker installed).
-mcp-guard sandbox examples/vulnerable_filesystem_server/mcp.json \
+mcp-fence sandbox examples/vulnerable_filesystem_server/mcp.json \
     --profile strict --execute
 ```
 

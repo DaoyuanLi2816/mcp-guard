@@ -8,7 +8,7 @@
 
 ## Reporting a vulnerability
 
-If you find a security issue in `mcp-guard` itself (the scanner, fuzzer,
+If you find a security issue in `mcp-fence` itself (the scanner, fuzzer,
 sandbox runner, or report generator):
 
 1. **Do not** open a public GitHub issue.
@@ -18,9 +18,9 @@ sandbox runner, or report generator):
 
 We aim to acknowledge reports within 5 business days.
 
-## Scope: what `mcp-guard` is and is not
+## Scope: what `mcp-fence` is and is not
 
-`mcp-guard` is a **defensive** local tool used by MCP server authors and
+`mcp-fence` is a **defensive** local tool used by MCP server authors and
 operators to audit their own servers. It is **not** an offensive tool and
 is not intended for unauthorized testing of third-party services.
 

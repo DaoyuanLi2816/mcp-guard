@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from mcp_guard.constants import FUZZ_MARKER
-from mcp_guard.fuzz.detectors import inspect_fuzz_result
-from mcp_guard.models import FuzzCase, FuzzResult
+from mcp_fence.constants import FUZZ_MARKER
+from mcp_fence.fuzz.detectors import inspect_fuzz_result
+from mcp_fence.models import FuzzCase, FuzzResult
 
 
 def _make(category: str, args: dict, response_text: str, *, response_ok: bool = True) -> FuzzResult:

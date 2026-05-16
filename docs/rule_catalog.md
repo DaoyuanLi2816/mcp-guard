@@ -2,7 +2,7 @@
 
 Every rule has a stable identifier (`MCPGNNN`) so reports stay diff-able
 across versions. The canonical source is
-[`src/mcp_guard/constants.py`](../src/mcp_guard/constants.py); this
+[`src/mcp_fence/constants.py`](../src/mcp_fence/constants.py); this
 document mirrors it with extra detail.
 
 Legend: **C** = critical, **H** = high, **M** = medium, **L** = low,

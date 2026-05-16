@@ -8,7 +8,7 @@ import os
 import sys
 from typing import Final
 
-_LOGGER_NAME: Final = "mcp_guard"
+_LOGGER_NAME: Final = "mcp_fence"
 
 
 def configure(debug: bool = False) -> None:
@@ -20,7 +20,7 @@ def configure(debug: bool = False) -> None:
             h.setLevel(level)
         return
     handler = logging.StreamHandler(stream=sys.stderr)
-    handler.setFormatter(logging.Formatter("[%(levelname)s mcp-guard] %(message)s"))
+    handler.setFormatter(logging.Formatter("[%(levelname)s mcp-fence] %(message)s"))
     handler.setLevel(level)
     logger.addHandler(handler)
 

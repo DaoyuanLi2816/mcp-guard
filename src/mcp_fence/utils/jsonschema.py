@@ -1,6 +1,6 @@
 """Small helpers for walking a JSON Schema without pulling in jsonschema.
 
-Only the subset that mcp-guard needs is supported:
+Only the subset that mcp-fence needs is supported:
 
 - ``type``
 - ``properties`` / ``required`` / ``additionalProperties``

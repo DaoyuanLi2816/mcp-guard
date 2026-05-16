@@ -4,7 +4,7 @@ Exposes ``read_allowed_file`` which only reads files inside this directory's
 ``data/`` folder. All paths are resolved and compared against the allowlist;
 traversal attempts are rejected.
 
-This server is what `mcp-guard scan` / `fuzz` should treat as **PASS**.
+This server is what `mcp-fence scan` / `fuzz` should treat as **PASS**.
 """
 
 from __future__ import annotations

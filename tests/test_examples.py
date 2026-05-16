@@ -1,7 +1,7 @@
 """End-to-end tests that exercise the bundled example servers.
 
 These tests launch each toy MCP server as a stdio child via the real
-mcp-guard inspector/fuzzer to cover the full pipeline.
+mcp-fence inspector/fuzzer to cover the full pipeline.
 """
 
 from __future__ import annotations
@@ -9,11 +9,11 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-from mcp_guard.fuzz import RunMode, generate_cases_for_inventory, run_fuzz
-from mcp_guard.fuzz.detectors import attach_findings
-from mcp_guard.mcp.inventory import ServerSpec, inspect_target
-from mcp_guard.scanner.config_scan import scan_config_file
-from mcp_guard.scanner.metadata_scan import scan_inventory
+from mcp_fence.fuzz import RunMode, generate_cases_for_inventory, run_fuzz
+from mcp_fence.fuzz.detectors import attach_findings
+from mcp_fence.mcp.inventory import ServerSpec, inspect_target
+from mcp_fence.scanner.config_scan import scan_config_file
+from mcp_fence.scanner.metadata_scan import scan_inventory
 
 EXAMPLES = Path(__file__).resolve().parent.parent / "examples"
 SAFE = EXAMPLES / "safe_server" / "server.py"

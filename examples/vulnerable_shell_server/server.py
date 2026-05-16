@@ -1,12 +1,12 @@
 """Example: a *vulnerable* MCP server that proxies a shell.
 
-The ``run_command`` tool feeds its argument straight into a shell. mcp-guard
+The ``run_command`` tool feeds its argument straight into a shell. mcp-fence
 in toy-mode injects a marker payload that exfiltrates a string into the
 response, demonstrating command injection without touching the rest of the
 system.
 
 This server is **intentionally vulnerable**. Only run it inside the
-provided Docker sandbox or against `mcp-guard fuzz --toy-mode`.
+provided Docker sandbox or against `mcp-fence fuzz --toy-mode`.
 """
 
 from __future__ import annotations

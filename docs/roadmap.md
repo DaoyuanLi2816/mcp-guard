@@ -1,6 +1,6 @@
 # Roadmap
 
-`mcp-guard 0.1.0` is the *vertical slice*: enough to run the full
+`mcp-fence 0.1.0` is the *vertical slice*: enough to run the full
 scan/inspect/fuzz/sandbox/report pipeline against a real stdio MCP
 server and ship a usable defensive tool.
 
@@ -18,7 +18,7 @@ server and ship a usable defensive tool.
   `network-deny`, `dev` profiles. `--dry-run` works without Docker.
 - Reports: `text`, `json`, `sarif` 2.1.0, offline `html`.
 - Optional local LLM judge (Ollama or OpenAI-compatible).
-- GitHub Actions CI workflow and reusable `mcp-guard.yml` snippet.
+- GitHub Actions CI workflow and reusable `mcp-fence.yml` snippet.
 
 ## Known gaps in 0.1.0
 
@@ -51,7 +51,7 @@ These are tracked here and *do not* block the v0.1 acceptance.
 
 - Windows-native sandboxing (e.g. Job Objects, App Containers) is on
   the roadmap. Today Windows users get `--dry-run` and are encouraged
-  to run mcp-guard inside WSL2 / Docker for the `--execute` path.
+  to run mcp-fence inside WSL2 / Docker for the `--execute` path.
 - Rootless `podman` parity — should just work; need to test the
   command builder.
 
@@ -68,7 +68,7 @@ These are tracked here and *do not* block the v0.1 acceptance.
 - Local SSRF capture server.
 - Pre-trained tool-poisoning classifier.
 - More language ecosystems (Node / Go).
-- `mcp-guard diff` for comparing inventories between versions
+- `mcp-fence diff` for comparing inventories between versions
   (rug-pull detection).
 
 ## v0.3+

@@ -251,7 +251,7 @@ def generate_cases_for_tool(
 
     # 8) Extra property.
     args = dict(base)
-    args["mcp_guard_unexpected_field"] = "shouldNotBeAllowed"
+    args["mcp_fence_unexpected_field"] = "shouldNotBeAllowed"
     cases.append(
         FuzzCase(
             case_id=_case_id(tool.name, "extra-property", 0, "unexpected"),

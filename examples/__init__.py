@@ -1,1 +1,1 @@
-"""Example MCP servers used by mcp-guard tests and documentation."""
+"""Example MCP servers used by mcp-fence tests and documentation."""

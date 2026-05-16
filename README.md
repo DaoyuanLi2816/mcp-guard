@@ -1,6 +1,6 @@
-# mcp-guard
+# mcp-fence
 
-[![CI](https://github.com/DaoyuanLi2816/mcp-guard/actions/workflows/ci.yml/badge.svg)](https://github.com/DaoyuanLi2816/mcp-guard/actions/workflows/ci.yml)
+[![CI](https://github.com/DaoyuanLi2816/mcp-fence/actions/workflows/ci.yml/badge.svg)](https://github.com/DaoyuanLi2816/mcp-fence/actions/workflows/ci.yml)
 [![Python](https://img.shields.io/badge/python-3.11%2B-blue)](https://www.python.org)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
 
@@ -8,9 +8,9 @@
 > Docker sandbox, and report generator for **Model Context Protocol**
 > servers.
 
-![mcp-guard architecture](docs/architecture.png)
+![mcp-fence architecture](docs/architecture.png)
 
-`mcp-guard` is a developer tool. Point it at your `mcp.json` (or any
+`mcp-fence` is a developer tool. Point it at your `mcp.json` (or any
 running MCP server you wrote) and it will:
 
 1. **Statically scan** the config and source for tool poisoning,
@@ -34,8 +34,8 @@ OpenAI-compatible endpoint.
 ## Install
 
 ```bash
-git clone https://github.com/DaoyuanLi2816/mcp-guard
-cd mcp-guard
+git clone https://github.com/DaoyuanLi2816/mcp-fence
+cd mcp-fence
 python -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate
 python -m pip install -e ".[dev]"
@@ -47,31 +47,31 @@ Requires Python 3.11+.
 
 ```bash
 # 1. Bring up the bundled examples in your working directory.
-mcp-guard init-example ./mcp-guard-examples
+mcp-fence init-example ./mcp-fence-examples
 
 # 2. Static scan the intentionally poisoned metadata server.
-mcp-guard scan examples/vulnerable_metadata_server/mcp.json
+mcp-fence scan examples/vulnerable_metadata_server/mcp.json
 
 # 3. Live-inspect the safe baseline.
-mcp-guard inspect examples/safe_server/mcp.json
+mcp-fence inspect examples/safe_server/mcp.json
 
 # 4. Fuzz the arbitrary-file-read server.
-mcp-guard fuzz examples/vulnerable_filesystem_server/mcp.json
+mcp-fence fuzz examples/vulnerable_filesystem_server/mcp.json
 
 # 5. Generate a `docker run` command that sandboxes any of the above.
-mcp-guard sandbox examples/vulnerable_filesystem_server/mcp.json \
+mcp-fence sandbox examples/vulnerable_filesystem_server/mcp.json \
     --profile strict --dry-run
 
 # 6. Turn a saved JSON result into an offline HTML report.
-mcp-guard scan examples/vulnerable_metadata_server/mcp.json \
+mcp-fence scan examples/vulnerable_metadata_server/mcp.json \
     --format json --output /tmp/scan.json
-mcp-guard report /tmp/scan.json --format html --output /tmp/scan.html
+mcp-fence report /tmp/scan.json --format html --output /tmp/scan.html
 ```
 
 ## Example output
 
 ```
-mcp-guard 0.1.0 :: scan :: target=examples/vulnerable_metadata_server/mcp.json
+mcp-fence 0.1.0 :: scan :: target=examples/vulnerable_metadata_server/mcp.json
   summary: total=1 score=7/100 verdict=FAIL
   by_severity: high=1
   by_category: secrets=1
@@ -123,7 +123,7 @@ assistant as instructions:
   payloads from external content.
 
 General-purpose SAST / npm-audit / pip-audit don't model any of this.
-mcp-guard has rules and fuzzers built specifically for it.
+mcp-fence has rules and fuzzers built specifically for it.
 
 ## Safety boundaries
 
@@ -141,7 +141,7 @@ mcp-guard has rules and fuzzers built specifically for it.
   `--traversal-target`. They never aim at `/etc/shadow` or `~/.ssh/`.
 
 `--allow-unsafe` is an explicit safety hatch for use inside the
-`mcp-guard sandbox` Docker profile. See [`SECURITY.md`](SECURITY.md) and
+`mcp-fence sandbox` Docker profile. See [`SECURITY.md`](SECURITY.md) and
 [`docs/sandboxing.md`](docs/sandboxing.md).
 
 ## Optional local-LLM judge (Ollama / vLLM)
@@ -151,7 +151,7 @@ optional judge:
 
 ```bash
 ollama pull qwen3:8b
-mcp-guard scan examples/vulnerable_metadata_server/mcp.json \
+mcp-fence scan examples/vulnerable_metadata_server/mcp.json \
     --inspect --llm-judge ollama --llm-model qwen3:8b
 ```
 
@@ -160,29 +160,29 @@ scan completes either way. See [`docs/local_llm.md`](docs/local_llm.md).
 
 ## GitHub Action
 
-Drop [`.github/workflows/mcp-guard.yml`](.github/workflows/mcp-guard.yml)
+Drop [`.github/workflows/mcp-fence.yml`](.github/workflows/mcp-fence.yml)
 into any repo with an `mcp.json`. It scans every config and uploads
 SARIF to GitHub's code scanning dashboard.
 
 ```yaml
-- name: install mcp-guard
-  run: pip install mcp-guard
+- name: install mcp-fence
+  run: pip install mcp-fence
 - name: scan
-  run: mcp-guard scan path/to/mcp.json --format sarif --output mcp-guard.sarif
+  run: mcp-fence scan path/to/mcp.json --format sarif --output mcp-fence.sarif
 - uses: github/codeql-action/upload-sarif@v3
   with:
-    sarif_file: mcp-guard.sarif
-    category: mcp-guard
+    sarif_file: mcp-fence.sarif
+    category: mcp-fence
 ```
 
 ## Five most useful commands
 
 ```bash
-mcp-guard scan examples/vulnerable_metadata_server/mcp.json
-mcp-guard inspect examples/safe_server/mcp.json
-mcp-guard fuzz examples/vulnerable_filesystem_server/mcp.json
-mcp-guard sandbox examples/vulnerable_shell_server/mcp.json --profile strict --dry-run
-mcp-guard report /tmp/scan.json --format html --output /tmp/scan.html
+mcp-fence scan examples/vulnerable_metadata_server/mcp.json
+mcp-fence inspect examples/safe_server/mcp.json
+mcp-fence fuzz examples/vulnerable_filesystem_server/mcp.json
+mcp-fence sandbox examples/vulnerable_shell_server/mcp.json --profile strict --dry-run
+mcp-fence report /tmp/scan.json --format html --output /tmp/scan.html
 ```
 
 ## Roadmap

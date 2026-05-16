@@ -1,7 +1,7 @@
 # `vulnerable_http_server`
 
 A toy *configuration* that demonstrates the HTTP/SSE transport risks.
-mcp-guard's live HTTP transport is on the roadmap; for v0.1 this example
+mcp-fence's live HTTP transport is on the roadmap; for v0.1 this example
 is detected purely via `mcp.json` scanning.
 
 ## What's wrong
@@ -12,7 +12,7 @@ is detected purely via `mcp.json` scanning.
 - `allowedDirectories: ["/"]` (`MCPG009`).
 - `env.API_TOKEN` is a plaintext fake secret (`MCPG006`).
 
-## Expected mcp-guard findings
+## Expected mcp-fence findings
 
 - `MCPG006`, `MCPG007`, `MCPG008`, `MCPG009`.
 

@@ -59,7 +59,7 @@ def _findings_table(findings: list[Finding]) -> str:
 
 def render_text(result: ScanResult) -> str:
     out = StringIO()
-    out.write(f"mcp-guard {result.tool_version} :: {result.kind} :: target={result.target}\n")
+    out.write(f"mcp-fence {result.tool_version} :: {result.kind} :: target={result.target}\n")
     if result.inventory is not None:
         inv = result.inventory
         out.write(

@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from mcp_guard.fuzz.generator import generate_cases_for_tool
-from mcp_guard.models import ToolSpec
+from mcp_fence.fuzz.generator import generate_cases_for_tool
+from mcp_fence.models import ToolSpec
 
 
 def _categories(cases) -> set[str]:

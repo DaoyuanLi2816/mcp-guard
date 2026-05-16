@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from mcp_guard.models import Finding, Inventory, Location, ScanResult, Severity, ToolSpec
-from mcp_guard.report.html import render_html
+from mcp_fence.models import Finding, Inventory, Location, ScanResult, Severity, ToolSpec
+from mcp_fence.report.html import render_html
 
 
 def test_html_contains_findings_and_no_cdn():

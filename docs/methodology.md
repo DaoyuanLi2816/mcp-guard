@@ -1,6 +1,6 @@
 # Methodology
 
-This doc describes what `mcp-guard` *actually does* when you run each
+This doc describes what `mcp-fence` *actually does* when you run each
 command, and why the results look the way they do.
 
 ## `scan`

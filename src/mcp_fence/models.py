@@ -144,7 +144,7 @@ class ScanResult(BaseModel):
 
     model_config = ConfigDict(extra="ignore")
     schema_version: str = "1.0"
-    tool: str = "mcp-guard"
+    tool: str = "mcp-fence"
     tool_version: str = "0.1.0"
     target: str
     kind: str = "scan"  # scan | inspect | fuzz
@@ -203,7 +203,7 @@ class ScanResult(BaseModel):
 
 
 class SandboxPlan(BaseModel):
-    """Output of `mcp-guard sandbox`."""
+    """Output of `mcp-fence sandbox`."""
 
     model_config = ConfigDict(extra="ignore")
     target: str

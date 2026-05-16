@@ -1,7 +1,7 @@
 """Tiny JSON-RPC over stdio framework used by the bundled example servers.
 
 This is a TEST fixture only. It implements just enough of the MCP wire
-format for `mcp-guard inspect`/`fuzz` to exercise the servers without
+format for `mcp-fence inspect`/`fuzz` to exercise the servers without
 pulling in the full MCP SDK as a hard runtime dependency.
 
 The framework is intentionally minimal:

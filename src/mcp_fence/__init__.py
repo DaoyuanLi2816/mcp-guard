@@ -1,4 +1,4 @@
-"""mcp-guard: local-first security scanner, inspector, fuzzer, sandbox, and report
+"""mcp-fence: local-first security scanner, inspector, fuzzer, sandbox, and report
 generator for Model Context Protocol servers."""
 
 from .models import (
