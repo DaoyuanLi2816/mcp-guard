@@ -1,0 +1,79 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: ${{ matrix.os }} / py${{ matrix.python-version }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python-version: ['3.11', '3.12']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: set up python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: install
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev]"
+
+      - name: ruff
+        run: ruff check .
+
+      - name: pytest
+        run: pytest -q
+
+      - name: scan vulnerable_metadata_server (json)
+        run: |
+          mcp-guard scan examples/vulnerable_metadata_server/mcp.json --format json --output /tmp/mcp_guard_scan.json || true
+          test -s /tmp/mcp_guard_scan.json
+
+      - name: render html artifact
+        run: |
+          mcp-guard report /tmp/mcp_guard_scan.json --format html --output /tmp/mcp_guard_report.html
+          test -s /tmp/mcp_guard_report.html
+
+      - name: sandbox dry-run
+        run: |
+          mcp-guard sandbox examples/vulnerable_filesystem_server/mcp.json --profile strict --dry-run
+
+      - name: upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mcp-guard-reports-${{ matrix.os }}-py${{ matrix.python-version }}
+          path: |
+            /tmp/mcp_guard_scan.json
+            /tmp/mcp_guard_report.html
+          if-no-files-found: ignore
+
+  windows:
+    name: windows / py3.12 (smoke)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: install
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev]"
+      - name: ruff
+        run: ruff check .
+      - name: pytest
+        run: pytest -q

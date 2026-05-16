@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "vulnerable-shell": {
+      "command": "bash",
+      "args": ["-c", "python examples/vulnerable_shell_server/server.py"],
+      "transport": "stdio"
+    }
+  }
+}

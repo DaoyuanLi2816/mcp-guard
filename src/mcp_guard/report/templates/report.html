@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>mcp-guard report — {{ result.target }}</title>
+<style>
+:root {
+  color-scheme: light dark;
+  --bg: #0f1115;
+  --panel: #161922;
+  --panel-2: #1d2230;
+  --text: #e7ecf3;
+  --muted: #97a3b6;
+  --border: #2a3142;
+  --accent: #6aa6ff;
+  --critical: #ef4444;
+  --high: #f97316;
+  --medium: #facc15;
+  --low: #38bdf8;
+  --info: #94a3b8;
+  --pass: #34d399;
+  --warn: #facc15;
+  --fail: #ef4444;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f7f8fb;
+    --panel: #ffffff;
+    --panel-2: #f1f4f9;
+    --text: #1c2026;
+    --muted: #5b6577;
+    --border: #d8dee9;
+  }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font: 14px/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+.wrap { max-width: 1100px; margin: 0 auto; padding: 32px 24px 96px; }
+h1, h2, h3 { margin: 0 0 12px; }
+h1 { font-size: 22px; }
+h2 { font-size: 17px; margin-top: 32px; }
+.muted { color: var(--muted); }
+.row { display: grid; gap: 16px; }
+.cards { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+.score-big { font-size: 38px; font-weight: 700; }
+.verdict { font-size: 14px; padding: 2px 10px; border-radius: 999px; display: inline-block; font-weight: 600; }
+.verdict.PASS { background: rgba(52,211,153,.16); color: var(--pass); }
+.verdict.WARN { background: rgba(250,204,21,.16); color: var(--warn); }
+.verdict.FAIL { background: rgba(239,68,68,.16); color: var(--fail); }
+table { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { background: var(--panel-2); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+tr:last-child td { border-bottom: none; }
+.sev { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+.sev.critical { background: rgba(239,68,68,.18); color: var(--critical); }
+.sev.high     { background: rgba(249,115,22,.18); color: var(--high); }
+.sev.medium   { background: rgba(250,204,21,.18); color: var(--medium); }
+.sev.low      { background: rgba(56,189,248,.18); color: var(--low); }
+.sev.info     { background: rgba(148,163,184,.18); color: var(--info); }
+.findings code, pre { background: var(--panel-2); border: 1px solid var(--border); padding: 6px 8px; border-radius: 6px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; }
+pre { padding: 12px; overflow: auto; }
+.kv { display: grid; grid-template-columns: 120px 1fr; gap: 6px 14px; }
+.kv dt { color: var(--muted); }
+.collapsible { border: 1px solid var(--border); border-radius: 10px; background: var(--panel); overflow: hidden; }
+.collapsible summary { padding: 12px 14px; cursor: pointer; font-weight: 600; background: var(--panel-2); }
+.collapsible[open] summary { border-bottom: 1px solid var(--border); }
+.collapsible .body { padding: 12px 14px; }
+.bar { display: flex; height: 10px; border-radius: 6px; overflow: hidden; background: var(--panel-2); border: 1px solid var(--border); }
+.bar span { display: block; height: 100%; }
+.legend { display: flex; gap: 12px; flex-wrap: wrap; font-size: 12px; color: var(--muted); margin-top: 8px; }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; vertical-align: middle; margin-right: 6px; }
+.tools-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.tool-chip { background: var(--panel-2); border: 1px solid var(--border); padding: 4px 10px; border-radius: 999px; font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>mcp-guard report</h1>
+    <div class="muted">target: <code>{{ result.target | e }}</code> · kind: {{ result.kind }} · generated {{ result.completed_at or result.started_at }}</div>
+  </header>
+
+  <section class="row cards" style="margin-top:20px;">
+    <div class="card">
+      <div class="muted">verdict</div>
+      <div><span class="verdict {{ result.summary.verdict }}">{{ result.summary.verdict }}</span></div>
+      <div class="muted" style="margin-top:8px;">{{ result.summary.total }} findings</div>
+    </div>
+    <div class="card">
+      <div class="muted">risk score</div>
+      <div class="score-big">{{ result.summary.score }}<span class="muted" style="font-size:16px;">/100</span></div>
+      <div class="bar" style="margin-top:8px;">
+        <span style="background:var(--critical); width: {{ severity_pct.critical }}%"></span>
+        <span style="background:var(--high); width: {{ severity_pct.high }}%"></span>
+        <span style="background:var(--medium); width: {{ severity_pct.medium }}%"></span>
+        <span style="background:var(--low); width: {{ severity_pct.low }}%"></span>
+        <span style="background:var(--info); width: {{ severity_pct.info }}%"></span>
+      </div>
+      <div class="legend">
+        <span><i style="background:var(--critical);"></i>critical {{ result.summary.by_severity.get('critical', 0) }}</span>
+        <span><i style="background:var(--high);"></i>high {{ result.summary.by_severity.get('high', 0) }}</span>
+        <span><i style="background:var(--medium);"></i>medium {{ result.summary.by_severity.get('medium', 0) }}</span>
+        <span><i style="background:var(--low);"></i>low {{ result.summary.by_severity.get('low', 0) }}</span>
+        <span><i style="background:var(--info);"></i>info {{ result.summary.by_severity.get('info', 0) }}</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="muted">categories</div>
+      {% if result.summary.by_category %}
+        <ul style="margin:6px 0 0; padding-left:18px;">
+          {% for cat, n in result.summary.by_category.items() %}
+            <li>{{ cat }} · {{ n }}</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <div class="muted">no findings</div>
+      {% endif %}
+    </div>
+  </section>
+
+  {% if result.inventory %}
+  <h2>Tool inventory</h2>
+  <details class="collapsible">
+    <summary>{{ result.inventory.tools | length }} tool(s) · transport {{ result.inventory.transport }} · {{ result.inventory.server_info.name or 'unknown server' }}</summary>
+    <div class="body">
+      <div class="tools-list">
+        {% for t in result.inventory.tools %}
+          <span class="tool-chip" title="{{ (t.description or '') | e }}">{{ t.name | e }}</span>
+        {% endfor %}
+      </div>
+      {% if result.inventory.warnings %}
+        <h3 style="margin-top:14px;">Protocol warnings</h3>
+        <ul>{% for w in result.inventory.warnings %}<li><code>{{ w | e }}</code></li>{% endfor %}</ul>
+      {% endif %}
+    </div>
+  </details>
+  {% endif %}
+
+  <h2>Top findings</h2>
+  {% if top_findings %}
+  <table>
+    <thead><tr><th>Severity</th><th>Rule</th><th>Title</th><th>Where</th><th>Detail</th></tr></thead>
+    <tbody>
+      {% for f in top_findings %}
+        <tr>
+          <td><span class="sev {{ f.severity.value }}">{{ f.severity.value }}</span></td>
+          <td><code>{{ f.rule_id }}</code></td>
+          <td>{{ f.title | e }}</td>
+          <td><code>{{ f.location.short() | e }}</code></td>
+          <td>{{ f.description | e }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+    <div class="muted">No findings.</div>
+  {% endif %}
+
+  <h2>All findings</h2>
+  {% if all_findings %}
+  <table class="findings">
+    <thead><tr><th>Severity</th><th>Rule</th><th>Title</th><th>Category</th><th>Where</th><th>Evidence</th><th>Recommendation</th></tr></thead>
+    <tbody>
+      {% for f in all_findings %}
+        <tr>
+          <td><span class="sev {{ f.severity.value }}">{{ f.severity.value }}</span></td>
+          <td><code>{{ f.rule_id }}</code></td>
+          <td>{{ f.title | e }}</td>
+          <td>{{ f.category }}</td>
+          <td><code>{{ f.location.short() | e }}</code></td>
+          <td>{% if f.evidence %}<code>{{ (f.evidence[:200]) | e }}</code>{% endif %}</td>
+          <td>{{ f.recommendation | e }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+
+  {% if result.fuzz_results %}
+  <h2>Fuzz results</h2>
+  <details class="collapsible">
+    <summary>{{ result.fuzz_results | length }} cases · {{ violations }} boundary violations · {{ skipped }} skipped</summary>
+    <div class="body">
+      <table>
+        <thead><tr><th>Tool</th><th>Category</th><th>Intent</th><th>Status</th><th>Signals</th></tr></thead>
+        <tbody>
+          {% for fr in result.fuzz_results %}
+            <tr>
+              <td><code>{{ fr.case.tool_name }}</code></td>
+              <td>{{ fr.case.payload_category }}</td>
+              <td>{{ fr.case.intent | e }}</td>
+              <td>{% if fr.skipped %}skipped{% elif fr.boundary_violation %}<b style="color:var(--critical)">violation</b>{% elif fr.response_ok %}ok{% else %}error{% endif %}</td>
+              <td>{% for sig in fr.detected_signals %}<code>{{ sig }}</code> {% endfor %}{% if fr.skipped %}<span class="muted">{{ fr.skip_reason | e }}</span>{% endif %}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </details>
+  {% endif %}
+
+  <h2>Remediation checklist</h2>
+  <ul>
+    {% for f in remediation %}
+      <li><b>{{ f.rule_id }}</b> {{ f.title | e }} — {{ f.recommendation | e }}</li>
+    {% endfor %}
+  </ul>
+
+  {% if sandbox_hint %}
+  <h2>Sandbox recommendation</h2>
+  <pre>{{ sandbox_hint | e }}</pre>
+  {% endif %}
+
+  <h2>Methodology</h2>
+  <dl class="kv">
+    <dt>mcp-guard</dt><dd>{{ result.tool_version }}</dd>
+    <dt>started</dt><dd>{{ result.started_at }}</dd>
+    <dt>finished</dt><dd>{{ result.completed_at or '—' }}</dd>
+    <dt>findings</dt><dd>{{ result.summary.total }}</dd>
+  </dl>
+  <p class="muted" style="margin-top:14px;">No external scripts, fonts, or styles are loaded. This report works offline.</p>
+</div>
+</body>
+</html>

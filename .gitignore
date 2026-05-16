@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+*.egg
+MANIFEST
+.eggs/
+
+# Virtualenv
+.venv/
+venv/
+env/
+ENV/
+
+# Tooling
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.tox/
+coverage.xml
+*.cover
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+
+# OS
+Thumbs.db
+
+# mcp-guard artifacts
+.mcp-guard/
+*.sarif
+mcp_guard_report.html
+mcp_guard_scan.json
+mcp_guard_fuzz_*.json
