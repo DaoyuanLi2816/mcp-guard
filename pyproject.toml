@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.11"
 license = {text = "Apache-2.0"}
 authors = [
-    {name = "mcp-guard contributors"},
+    {name = "Daoyuan Li", email = "lidaoyuan2816@gmail.com"},
 ]
 keywords = ["mcp", "security", "scanner", "fuzzer", "sandbox", "llm", "tool-poisoning"]
 classifiers = [
@@ -42,8 +42,9 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/mcp-guard/mcp-guard"
-Issues = "https://github.com/mcp-guard/mcp-guard/issues"
+Homepage = "https://github.com/DaoyuanLi2816/mcp-guard"
+Issues = "https://github.com/DaoyuanLi2816/mcp-guard/issues"
+Repository = "https://github.com/DaoyuanLi2816/mcp-guard"
 
 [project.scripts]
 mcp-guard = "mcp_guard.cli:app"

@@ -5,7 +5,7 @@ Thanks for considering a contribution to `mcp-guard`.
 ## Development setup
 
 ```bash
-git clone https://github.com/mcp-guard/mcp-guard
+git clone https://github.com/DaoyuanLi2816/mcp-guard
 cd mcp-guard
 python -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate
