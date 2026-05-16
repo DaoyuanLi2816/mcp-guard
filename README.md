@@ -4,6 +4,8 @@
 > Docker sandbox, and report generator for **Model Context Protocol**
 > servers.
 
+![mcp-guard architecture](docs/architecture.png)
+
 `mcp-guard` is a developer tool. Point it at your `mcp.json` (or any
 running MCP server you wrote) and it will:
 
