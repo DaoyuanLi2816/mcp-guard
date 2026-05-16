@@ -1,5 +1,9 @@
 # mcp-guard
 
+[![CI](https://github.com/DaoyuanLi2816/mcp-guard/actions/workflows/ci.yml/badge.svg)](https://github.com/DaoyuanLi2816/mcp-guard/actions/workflows/ci.yml)
+[![Python](https://img.shields.io/badge/python-3.11%2B-blue)](https://www.python.org)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
+
 > Local-first security scanner, MCP protocol inspector, dynamic fuzzer,
 > Docker sandbox, and report generator for **Model Context Protocol**
 > servers.
